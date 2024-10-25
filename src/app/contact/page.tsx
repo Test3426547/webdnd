@@ -77,10 +77,10 @@ function ContactForm() {
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Budget</legend>
               <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput label="$25K – $50K" name="budget" value="25" />
-                <RadioInput label="$50K – $100K" name="budget" value="50" />
-                <RadioInput label="$100K – $150K" name="budget" value="100" />
-                <RadioInput label="More than $150K" name="budget" value="150" />
+                <RadioInput label="$1K – $2K" name="budget" value="2" />
+                <RadioInput label="$2K – $5K" name="budget" value="5" />
+                <RadioInput label="$5K – $10K" name="budget" value="10" />
+                <RadioInput label="More than $10K" name="budget" value="10" />
               </div>
             </fieldset>
           </div>
@@ -100,8 +100,7 @@ function ContactDetails() {
         Our offices
       </h2>
       <p className="mt-6 text-base text-neutral-600">
-        Prefer doing things in person? We don’t but we have to list our
-        addresses here for legal reasons.
+        Interested in face-to-face interactions? While we typically prefer digital communications for efficiency, we are pleased to provide our office addresses as required.
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
@@ -112,8 +111,8 @@ function ContactDetails() {
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
           {[
-            ['Careers', 'careers@studioagency.com'],
-            ['Press', 'press@studioagency.com'],
+            ['Careers', 'careers@spectrumwebco.com.au'],
+            ['Consults', 'consults@spectrumwebco.com.au'],
           ].map(([label, email]) => (
             <div key={email}>
               <dt className="font-semibold text-neutral-950">{label}</dt>

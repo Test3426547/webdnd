@@ -1,12 +1,13 @@
 {
-  "name": "tailwindui-studio",
-  "version": "0.1.0",
+  "name": "spectrum-web-co",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:email-styles && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:email-styles": "node emails/build-styles.js"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -14,6 +15,7 @@
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.0.4",
+    "@supabase/supabase-js": "^2.45.6",
     "@types/mdx": "^2.0.7",
     "@types/node": "^20.10.8",
     "@types/react": "^18.2.47",
@@ -35,7 +37,9 @@
     "shiki": "^0.11.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "unified-conditional": "0.0.2"
+    "unified-conditional": "0.0.2",
+    "googleapis": "^118.0.0",
+    "juice": "^8.0.0"
   },
   "devDependencies": {
     "eslint": "^8.56.0",

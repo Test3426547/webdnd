@@ -73,7 +73,7 @@ function CaseStudies({
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          At Web Design 'n' Development, we specialize in creating innovative web design and development solutions that are uniquely tailored to your business needs. Our team collaborates closely with you to understand your goals, ensuring we deliver digital experiences that not only look exceptional but also engage your audience and drive meaningful results for your business growth. We are committed to helping you harness the power of the web to expand your reach and achieve your objectives.
+          At Spectrum Web Co, we specialize in creating innovative web design and development solutions that are uniquely tailored to your business needs. Our team collaborates closely with you to understand your goals, ensuring we deliver digital experiences that not only look exceptional but also engage your audience and drive meaningful results for your business growth. We are committed to helping you harness the power of the web to expand your reach and achieve your objectives.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -143,11 +143,11 @@ function Services() {
             </FadeIn>
           </div>
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
-            <ListItem title="Custom Web Development">
-              We specialize in developing high-end web applications that are custom-tailored to your business needs. Leveraging cutting-edge technologies such as React, Vue.js, Next.js, Nuxt.js, Svelte, Astro, and more, we build scalable, efficient, and user-friendly applications. Our solutions are designed to enhance your business operations, streamline processes, and provide your users with exceptional experiences that keep them coming back.
-            </ListItem>
+          <ListItem title="Custom Web Development">
+  We specialize in developing high-end web applications that are custom-tailored to your business needs. Leveraging cutting-edge technologies such as React, Vue.js, Next.js, Nuxt.js, Svelte, Astro, and more, we build scalable, efficient, and user-friendly applications. Our solutions are designed to enhance your business operations, streamline processes, and provide your users with exceptional experiences that keep them coming back.
+</ListItem>
             <ListItem title="Innovative Web Design">
-              Our creative team delivers purpose-driven web design solutions that ensure your website stands out in a crowded digital marketplace. We focus on crafting visually stunning designs that effectively communicate your brand's message, resonate with your target audience, and drive engagement. From concept to completion, we work closely with you to bring your vision to life.
+              Our creative team delivers purpose-driven web design solutions that ensure your website stands out in a crowded digital marketplace. We focus on crafting visually stunning designs that effectively communicate your brand&apos;s message, resonate with your target audience, and drive engagement. From concept to completion, we work closely with you to bring your vision to life.
             </ListItem>
             <ListItem title="E-commerce Solutions">
               We build engaging and robust e-commerce platforms using Shopify and other leading technologies. Our e-commerce solutions are designed to provide seamless online shopping experiences for your customers, with intuitive navigation, secure transactions, and responsive designs. We help you increase sales, improve customer satisfaction, and grow your business in the competitive online retail space.
@@ -164,7 +164,7 @@ function Services() {
 
 export const metadata: Metadata = {
   description:
-    "We are a high-end boutique agency providing creative and innovative web design and development services in Sydney, Australia.",
+    "We are a high-end boutique agency providing creative and innovative web design and development services Australia.",
 }
 
 export default async function Home() {
@@ -178,7 +178,7 @@ export default async function Home() {
             High-end boutique web design and development agency in Sydney, Australia
           </h1>
           <p className="mt-6 text-xl text-neutral-600">
-            At Web Design 'n' Development, we are dedicated to providing creative and innovative, purpose-driven web design and development services. Based in Sydney, Australia, we specialize in crafting bespoke digital solutions for small to medium businesses. Our mission is to help you establish a strong online presence, engage your audience effectively, and achieve your business objectives through high-quality web experiences.
+            At Spectrum Web Co, we are dedicated to providing creative and innovative, purpose-driven web design and development services. Based in Sydney, Australia, we specialize in crafting bespoke digital solutions for small to medium businesses. Our mission is to help you establish a strong online presence, engage your audience effectively, and achieve your business objectives through high-quality web experiences.
           </p>
         </FadeIn>
       </Container>
@@ -191,7 +191,7 @@ export default async function Home() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Phobia', logo: logoPhobiaDark }}
       >
-        "Working with Web Design 'n' Development was a transformative experience for our company. They exceeded our expectations with their innovative design and development services, delivering a website that truly represents our brand and resonates with our target audience. Their team's professionalism, creativity, and commitment to excellence made the entire process seamless and enjoyable. We highly recommend them to any business seeking top-tier web solutions."
+        Working with Spectrum Web Co was a transformative experience for our company. They exceeded our expectations with their innovative design and development services, delivering a website that truly represents our brand and resonates with our target audience. Their team&apos;s professionalism, creativity, and commitment to excellence made the entire process seamless and enjoyable. We highly recommend them to any business seeking top-tier web solutions.
       </Testimonial>
 
       <Services />

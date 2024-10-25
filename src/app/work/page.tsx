@@ -152,9 +152,10 @@ export default async function Work() {
         title="Proven solutions for real-world problems."
       >
         <p>
-          We believe in efficiency and maximizing our resources to provide the
-          best value to our clients. The primary way we do that is by re-using
-          the same five projects we’ve been developing for the past decade.
+          We are committed to efficiency and resource optimization, ensuring
+          unparalleled value for our clients. Our cornerstone approach is the
+          strategic evolution of five core projects that have been the foundation
+          of our excellence over the past decade.
         </p>
       </PageIntro>
 
@@ -164,8 +165,7 @@ export default async function Work() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Mail Smirk', logo: logoMailSmirk }}
       >
-        We approached <em>Studio</em> because we loved their past work. They
-        delivered something remarkably similar in record time.
+        We engaged <em>Spectrum Web Co</em> due to our admiration of their impressive portfolio. They delivered a product of exceptional quality promptly, exceeding our expectations.
       </Testimonial>
 
       <Clients />

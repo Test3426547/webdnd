@@ -58,24 +58,27 @@ function Discover() {
     <Section title="Discover" image={{ src: imageWhiteboard }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          We work closely with our clients to understand their{' '}
-          <strong className="font-semibold text-neutral-950">needs</strong> and
-          goals, embedding ourselves in their every day operations to understand
-          what makes their business tick.
+          We collaborate intimately with our clients to gain a profound understanding of their{' '}
+          <strong className="font-semibold text-neutral-950">requirements</strong> and
+          objectives, immersing ourselves in their daily operations to grasp the core dynamics of
+          their business.
         </p>
         <p>
-          Our team of private investigators shadow the company director’s for
-          several weeks while our account managers focus on going through their
-          trash. Our senior security experts then perform social engineering
-          hacks to gain access to their{' '}
-          <strong className="font-semibold text-neutral-950">business</strong>{' '}
-          accounts — handing that information over to our forensic accounting
-          team.
+          Our dedicated team of professional analysts conducts thorough shadowing
+          of company directors over several weeks, while our account managers
+          diligently perform detailed audits of company documents. Our leading
+          security experts employ advanced social engineering techniques to
+          securely access and assess their{' '}
+          <strong className="font-semibold text-neutral-950">
+            business
+          </strong>{' '}
+          accounts, subsequently collaborating with our forensic accounting
+          team for a comprehensive evaluation.
         </p>
         <p>
-          Once the full audit is complete, we report back with a comprehensive{' '}
-          <strong className="font-semibold text-neutral-950">plan</strong> and,
-          more importantly, a budget.
+          Following the completion of our exhaustive audit, we furnish a detailed, strategic{' '}
+          <strong className="font-semibold text-neutral-950">proposal</strong> that includes critical insights,
+          coupled with an expertly crafted budget plan.
         </p>
       </div>
 
@@ -99,23 +102,17 @@ function Build() {
     <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          Based off of the discovery phase, we develop a comprehensive roadmap
-          for each product and start working towards delivery. The roadmap is an
-          intricately tangled mess of technical nonsense designed to drag the
-          project out as long as possible.
+          Utilizing insights gained from the discovery phase, we craft a clear
+          and strategic roadmap for each product, setting a course towards
+          successful delivery. This roadmap is meticulously designed to align
+          with industry standards and expedite the project timeline, ensuring
+          efficient and effective outcomes.
         </p>
         <p>
-          Each client is assigned a key account manager to keep lines of
-          communication open and obscure the actual progress of the project.
-          They act as a buffer between the client’s incessant nagging and the
-          development team who are hard at work scouring open source projects
-          for code to re-purpose.
+          Each client is partnered with a dedicated key account manager, ensuring seamless communication and transparency throughout the project lifecycle. These managers serve as invaluable liaisons, addressing client inquiries and enabling the development team to focus on crafting innovative solutions and leveraging cutting-edge open-source technologies.
         </p>
         <p>
-          Our account managers are trained to only reply to client emails after
-          9pm, several days after the initial email. This reinforces the general
-          aura that we are very busy and dissuades clients from asking for
-          changes.
+          Our account managers ensure timely responses to client emails, with all communications conducted in a professional and courteous manner. This approach maintains a high standard of service and fosters a positive and collaborative relationship with our clients.
         </p>
       </div>
 
@@ -123,7 +120,7 @@ function Build() {
         author={{ name: 'Debra Fiscal', role: 'CEO of Unseal' }}
         className="mt-12"
       >
-        Studio were so regular with their progress updates we almost began to
+        Spectrum Web Co were so regular with their progress updates we almost began to
         think they were automated!
       </Blockquote>
     </Section>
@@ -135,49 +132,28 @@ function Deliver() {
     <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          About halfway through the Build phase, we push each project out by 6
-          weeks due to a change in{' '}
-          <strong className="font-semibold text-neutral-950">
-            requirements
-          </strong>
-          . This allows us to increase the budget a final time before launch.
+          During the midpoint of the Build phase, we strategically adjust the project timeline by extending it 6 weeks due to evolving <strong className="font-semibold text-neutral-950">requirements</strong>. This adjustment allows us to optimize the budget effectively before project completion.
         </p>
         <p>
-          Despite largely using pre-built components, most of the{' '}
-          <strong className="font-semibold text-neutral-950">progress</strong>{' '}
-          on each project takes place in the final 24 hours. The development
-          time allocated to each client is actually spent making augmented
-          reality demos that go viral on social media.
+          While leveraging a set of pre-designed components, a significant portion of the project <strong className="font-semibold text-neutral-950">development</strong> occurs in the final stages. Much of the allocated development period is devoted to creating captivating augmented reality demonstrations that garner widespread attention on social media platforms.
         </p>
         <p>
-          We ensure that the main pages of the site are{' '}
-          <strong className="font-semibold text-neutral-950">
-            fully functional
-          </strong>{' '}
-          at launch — the auxiliary pages will, of course, be lorem ipusm shells
-          which get updated as part of our exorbitant{' '}
-          <strong className="font-semibold text-neutral-950">
-            maintenance
-          </strong>{' '}
-          retainer.
+          We ensure that the core pages of the website are <strong className="font-semibold text-neutral-950">fully operational</strong> at launch. The peripheral pages will begin as placeholder content, and will be updated as part of our premium <strong className="font-semibold text-neutral-950">maintenance</strong> service agreement.
         </p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-neutral-950">
-        Included in this phase
+        Elements Included in this Phase
       </h3>
       <List className="mt-8">
         <ListItem title="Testing">
-          Our projects always have 100% test coverage, which would be impressive
-          if our tests weren’t as porous as a sieve.
+          Our development ensures comprehensive test coverage to maintain quality assurance, although there is room for enhancement in test effectiveness.
         </ListItem>
         <ListItem title="Infrastructure">
-          To ensure reliability we only use the best Digital Ocean droplets that
-          $4 a month can buy.
+          To ensure reliability, we deploy top-tier Digital Ocean infrastructure suitable for robust services.
         </ListItem>
         <ListItem title="Support">
-          Because we hold the API keys for every critical service your business
-          uses, you can expect a lifetime of support, and invoices, from us.
+          By managing the API keys for all crucial business services, we offer ongoing support and partnership, ensuring a seamless operational experience.
         </ListItem>
       </List>
     </Section>
@@ -199,39 +175,32 @@ function Values() {
         title="Balancing reliability and innovation"
       >
         <p>
-          We strive to stay at the forefront of emerging trends and
-          technologies, while completely ignoring them and forking that old
-          Rails project we feel comfortable using. We stand by our core values
-          to justify that decision.
+          We are committed to embracing new trends and technologies in the industry.
+          Our team consistently evaluates and integrates innovative solutions
+          to ensure we are leveraging the best tools available. Our core values guide
+          us in making strategic decisions that benefit our clients.
         </p>
       </SectionIntro>
 
       <Container className="mt-24">
         <GridList>
           <GridListItem title="Meticulous">
-            The first part of any partnership is getting our designer to put
-            your logo in our template. The second step is getting them to do the
-            colors.
+            In every collaboration, our first step is to seamlessly integrate your brand identity into our existing frameworks, ensuring your logo is elegantly incorporated. Subsequently, we meticulously tailor the color scheme to align with your brand essence, creating a cohesive and bespoke aesthetic.
           </GridListItem>
           <GridListItem title="Efficient">
-            We pride ourselves on never missing a deadline which is easy because
-            most of the work was done years ago.
+            We pride ourselves on our exceptional ability to consistently meet project deadlines, a testament to our strategic foresight and meticulous planning.
           </GridListItem>
           <GridListItem title="Adaptable">
-            Every business has unique needs and our greatest challenge is
-            shoe-horning those needs into something we already built.
+            In the dynamic landscape of modern business, each organization faces its own set of challenges. Our commitment is to skillfully tailor our pre-existing solutions to meet the unique demands of our clients, ensuring a perfect fit for their specific needs.
           </GridListItem>
           <GridListItem title="Honest">
-            We are transparent about all of our processes, banking on the simple
-            fact our clients never actually read anything.
+            We pride ourselves on maintaining transparency throughout all our processes, ensuring our clients are informed and engaged at every step.
           </GridListItem>
           <GridListItem title="Loyal">
-            We foster long-term relationships with our clients that go beyond
-            just delivering a product, allowing us to invoice them for decades.
+            We cultivate enduring partnerships that extend beyond mere project delivery, enabling sustained collaboration and mutual growth for years to come.
           </GridListItem>
           <GridListItem title="Innovative">
-            The technological landscape is always evolving and so are we. We are
-            constantly on the lookout for new open source projects to clone.
+            In an ever-evolving technological landscape, our commitment is to stay at the forefront of innovation. We actively seek and integrate cutting-edge open-source projects to enhance our capabilities.
           </GridListItem>
         </GridList>
       </Container>
@@ -250,9 +219,7 @@ export default function Process() {
     <>
       <PageIntro eyebrow="Our process" title="How we work">
         <p>
-          We believe in efficiency and maximizing our resources to provide the
-          best value to our clients. The primary way we do that is by re-using
-          the same five projects we’ve been developing for the past decade.
+          Our commitment lies in optimizing efficiency and effectively utilizing our resources to deliver exceptional value to our clients. We achieve this by crafting bespoke projects for each client, ensuring innovative and tailored solutions that are aligned with their unique needs and aspirations.
         </p>
       </PageIntro>
 
