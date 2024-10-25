@@ -7,6 +7,8 @@ import fs from 'fs'
 import path from 'path'
 import juice from 'juice'
 import { google } from 'googleapis'
+import postcss from 'postcss'
+import tailwindcss from 'tailwindcss'
 
 // Define your validation schema
 const ContactSchema = z.object({
@@ -116,13 +118,22 @@ async function sendMessage(
 async function renderTemplate(filename: string, data: any) {
   const templatePath = path.join(process.cwd(), 'emails/templates', filename)
   let html = fs.readFileSync(templatePath, 'utf-8')
+
+  // Replace placeholders with actual data
   html = html.replace(/{{\s*(\w+)\s*}}/g, (_, key) => data[key] || '')
 
-  const styles = fs.readFileSync(
-    path.join(process.cwd(), 'emails/build/styles.css'),
-    'utf-8'
-  )
+  // Process Tailwind CSS directly
+  const inputCss = '@tailwind utilities;'
+  const result = await postcss([
+    tailwindcss('./emails/tailwind-email.config.js'),
+  ]).process(inputCss, { from: undefined })
+
+  // Insert the processed CSS into the template
+  const styles = result.css
   html = html.replace('{{styles}}', styles)
+
+  // Inline the CSS
   html = juice(html)
+
   return html
 }
