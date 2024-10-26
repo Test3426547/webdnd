@@ -4,11 +4,13 @@ import Link from 'next/link'
 
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
+import { HeroSection } from '@/components/HeroSection'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { List, ListItem } from '@/components/List'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { Testimonial } from '@/components/Testimonial'
+import ShineBorder from "@/components/ui/shine-border"
 import logoBrightPath from '@/images/clients/bright-path/logo-light.svg'
 import logoFamilyFund from '@/images/clients/family-fund/logo-light.svg'
 import logoGreenLife from '@/images/clients/green-life/logo-light.svg'
@@ -34,29 +36,38 @@ const clients = [
 
 function Clients() {
   return (
-    <div className="mt-24 rounded-4xl bg-neutral-950 py-20 sm:mt-32 sm:py-32 lg:mt-56">
-      <Container>
-        <FadeIn className="flex items-center gap-x-8">
-          <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            We partner with businesses to deliver innovative web solutions
-          </h2>
-          <div className="h-px flex-auto bg-neutral-800" />
-        </FadeIn>
-        <FadeInStagger faster>
-          <ul
-            role="list"
-            className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
-          >
-            {clients.map(([client, logo]) => (
-              <li key={client}>
-                <FadeIn>
-                  <Image src={logo} alt={client} unoptimized />
-                </FadeIn>
-              </li>
-            ))}
-          </ul>
-        </FadeInStagger>
-      </Container>
+    <div className="mt-24 sm:mt-32 lg:mt-56">
+      <div className="relative mx-auto w-[calc(100vw-2rem)] sm:w-[calc(100vw-4rem)] lg:w-[calc(100vw-6rem)]">
+        <ShineBorder
+          className="w-full overflow-hidden rounded-xl bg-neutral-950 py-20 sm:py-32"
+          color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+          borderWidth={16}
+          borderRadius={12} // Match the rounded-xl (12px)
+        >
+          <Container>
+            <FadeIn className="flex items-center gap-x-8">
+              <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
+                We partner with businesses to deliver innovative web solutions
+              </h2>
+              <div className="h-px flex-auto bg-neutral-800" />
+            </FadeIn>
+            <FadeInStagger faster>
+              <ul
+                role="list"
+                className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
+              >
+                {clients.map(([client, logo]) => (
+                  <li key={client}>
+                    <FadeIn>
+                      <Image src={logo} alt={client} unoptimized />
+                    </FadeIn>
+                  </li>
+                ))}
+              </ul>
+            </FadeInStagger>
+          </Container>
+        </ShineBorder>
+      </div>
     </div>
   )
 }
@@ -143,11 +154,11 @@ function Services() {
             </FadeIn>
           </div>
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
-          <ListItem title="Custom Web Development">
-  We specialize in developing high-end web applications that are custom-tailored to your business needs. Leveraging cutting-edge technologies such as React, Vue.js, Next.js, Nuxt.js, Svelte, Astro, and more, we build scalable, efficient, and user-friendly applications. Our solutions are designed to enhance your business operations, streamline processes, and provide your users with exceptional experiences that keep them coming back.
-</ListItem>
+            <ListItem title="Custom Web Development">
+              We specialize in developing high-end web applications that are custom-tailored to your business needs. Leveraging cutting-edge technologies such as React, Vue.js, Next.js, Nuxt.js, Svelte, Astro, and more, we build scalable, efficient, and user-friendly applications. Our solutions are designed to enhance your business operations, streamline processes, and provide your users with exceptional experiences that keep them coming back.
+            </ListItem>
             <ListItem title="Innovative Web Design">
-              Our creative team delivers purpose-driven web design solutions that ensure your website stands out in a crowded digital marketplace. We focus on crafting visually stunning designs that effectively communicate your brand&apos;s message, resonate with your target audience, and drive engagement. From concept to completion, we work closely with you to bring your vision to life.
+              Our creative team delivers purpose-driven web design solutions that ensure your website stands out in a crowded digital marketplace. We focus on crafting visually stunning designs that effectively communicate your brand's message, resonate with your target audience, and drive engagement. From concept to completion, we work closely with you to bring your vision to life.
             </ListItem>
             <ListItem title="E-commerce Solutions">
               We build engaging and robust e-commerce platforms using Shopify and other leading technologies. Our e-commerce solutions are designed to provide seamless online shopping experiences for your customers, with intuitive navigation, secure transactions, and responsive designs. We help you increase sales, improve customer satisfaction, and grow your business in the competitive online retail space.
@@ -173,14 +184,7 @@ export default async function Home() {
   return (
     <>
       <Container className="mt-24 sm:mt-32 md:mt-56">
-        <FadeIn className="max-w-3xl">
-          <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
-            High-end boutique web design and development agency in Sydney, Australia
-          </h1>
-          <p className="mt-6 text-xl text-neutral-600">
-            At Spectrum Web Co, we are dedicated to providing creative and innovative, purpose-driven web design and development services. Based in Sydney, Australia, we specialize in crafting bespoke digital solutions for small to medium businesses. Our mission is to help you establish a strong online presence, engage your audience effectively, and achieve your business objectives through high-quality web experiences.
-          </p>
-        </FadeIn>
+        <HeroSection />
       </Container>
 
       <Clients />
@@ -191,7 +195,7 @@ export default async function Home() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Phobia', logo: logoPhobiaDark }}
       >
-        Working with Spectrum Web Co was a transformative experience for our company. They exceeded our expectations with their innovative design and development services, delivering a website that truly represents our brand and resonates with our target audience. Their team&apos;s professionalism, creativity, and commitment to excellence made the entire process seamless and enjoyable. We highly recommend them to any business seeking top-tier web solutions.
+        Working with Spectrum Web Co was a transformative experience for our company. They exceeded our expectations with their innovative design and development services, delivering a website that truly represents our brand and resonates with our target audience. Their team's professionalism, creativity, and commitment to excellence made the entire process seamless and enjoyable. We highly recommend them to any business seeking top-tier web solutions.
       </Testimonial>
 
       <Services />

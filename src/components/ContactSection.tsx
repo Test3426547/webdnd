@@ -31,9 +31,12 @@ export function ContactSection() {
     return re.test(number)
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    // Client-side validation
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault(); // Stop form from submitting normally
+    e.stopPropagation(); // Stop event bubbling
+    console.log('Form submission prevented');
+
+    // Validation checks
     const newErrors = {
       name: '',
       email: '',
@@ -63,25 +66,37 @@ export function ContactSection() {
     }
 
     if (hasError) {
+      console.log('Validation failed:', newErrors);
       setErrors(newErrors)
       return
     }
 
-    setErrors({ name: '', email: '', mobileNumber: '', message: '' })
     setStatus('sending')
+    console.log('Attempting to send data:', formData);
 
     try {
-      const response = await fetch('/api/contact', {
+      const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`
+      console.log('Sending to:', apiUrl);
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(formData),
       })
 
+      console.log('Response status:', response.status);
+      
       if (!response.ok) {
-        throw new Error('Failed to send message')
+        const errorData = await response.json();
+        console.error('API Error:', errorData);
+        throw new Error(errorData.error || 'Failed to send message')
       }
+
+      const data = await response.json();
+      console.log('Success response:', data);
 
       setStatus('success')
       setFormData({
@@ -91,8 +106,8 @@ export function ContactSection() {
         message: '',
       })
     } catch (error) {
+      console.error('Submission error:', error);
       setStatus('error')
-      console.error('Error sending message:', error)
     }
   }
 
@@ -105,7 +120,11 @@ export function ContactSection() {
               Tell us about your project
             </h2>
             
-            <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+            <form 
+              onSubmit={handleSubmit} 
+              className="mt-6 space-y-6"
+              method="POST" // Remove this if present
+            >
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-white">
                   Name
@@ -163,7 +182,11 @@ export function ContactSection() {
               </div>
 
               <div>
-                <Button type="submit" invert disabled={status === 'sending'}>
+                <Button 
+                  type="submit" 
+                  invert 
+                  disabled={status === 'sending'}
+                >
                   {status === 'sending' ? 'Sending...' : 'Send Message'}
                 </Button>
                 {status === 'success' && (

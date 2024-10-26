@@ -27,19 +27,27 @@ const ContactSchema = z.object({
 export async function POST(request: Request) {
   try {
     const jsonData = await request.json()
-
-    // Validate the data
     const data = ContactSchema.parse(jsonData)
 
-    // Insert into the database
-    const { error: dbError } = await supabase.from('contact_submissions').insert([data])
+    // 1. Insert into database
+    const { error: dbError } = await supabase
+      .from('contact_submissions')
+      .insert([data])
 
     if (dbError) {
       return NextResponse.json({ error: dbError.message }, { status: 500 })
     }
 
-    // Send emails
+    // 2. Send emails
     await sendEmails(data)
+
+    // 3. Create calendar events
+    try {
+      await createCalendarEvents(data)
+    } catch (calendarError) {
+      console.error('Failed to create calendar events:', calendarError)
+      // Don't fail the whole request if calendar events fail
+    }
 
     return NextResponse.json({ message: 'Submission successful' }, { status: 200 })
   } catch (error) {
@@ -136,4 +144,9 @@ async function renderTemplate(filename: string, data: any) {
   html = juice(html)
 
   return html
+}
+
+// Move the calendar event creation logic from complete/route.ts here
+async function createCalendarEvents(data: any) {
+  // Calendar event creation logic here...
 }

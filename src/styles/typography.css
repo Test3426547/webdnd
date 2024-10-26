@@ -22,8 +22,7 @@
   /* Headings */
   :where(h2) {
     font-weight: theme(fontWeight.semibold);
-    font-family: theme(fontFamily.display);
-    font-variation-settings: theme(fontFamily.display[1].fontVariationSettings);
+    font-family: theme(fontFamily.mono);
     font-size: theme(fontSize.2xl);
     line-height: theme(fontSize.2xl[1].lineHeight);
     margin-top: theme(spacing.16);
@@ -31,8 +30,7 @@
 
   :where(h3) {
     font-weight: theme(fontWeight.semibold);
-    font-family: theme(fontFamily.display);
-    font-variation-settings: theme(fontFamily.display[1].fontVariationSettings);
+    font-family: theme(fontFamily.mono);
     font-size: theme(fontSize.xl);
     line-height: theme(fontSize.xl[1].lineHeight);
     margin-top: theme(spacing.10);
