@@ -16,11 +16,11 @@ async function loadEntries<T extends { date: string }>(
             ...metadata,
             metadata,
             href: `/${directory}/${filename.replace(/\/page\.mdx$/, '')}`,
-          }
+          };
         },
       ),
     )
-  ).sort((a, b) => b.date.localeCompare(a.date))
+  ).sort((a, b) => b.date.localeCompare(a.date));
 }
 
 type ImagePropsWithOptionalAlt = Omit<ImageProps, 'alt'> & { alt?: string }

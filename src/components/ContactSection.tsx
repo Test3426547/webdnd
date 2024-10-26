@@ -68,8 +68,32 @@ export function ContactSection() {
     }
 
     setErrors({ name: '', email: '', mobileNumber: '', message: '' })
+    setStatus('sending')
 
-    // ... existing submit logic ...
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setStatus('success')
+      setFormData({
+        name: '',
+        email: '',
+        mobileNumber: '',
+        message: '',
+      })
+    } catch (error) {
+      setStatus('error')
+      console.error('Error sending message:', error)
+    }
   }
 
   return (
@@ -80,11 +104,77 @@ export function ContactSection() {
             <h2 className="font-display text-3xl font-medium text-white [text-wrap:balance] sm:text-4xl">
               Tell us about your project
             </h2>
-            <div className="mt-6 flex">
-              <Button href="/contact" invert>
-                Say G&apos;day
-              </Button>
-            </div>
+            
+            <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-white">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="mt-1 block w-full rounded-md border border-gray-700 bg-neutral-800 px-3 py-2 text-white shadow-sm focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                />
+                {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-white">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="mt-1 block w-full rounded-md border border-gray-700 bg-neutral-800 px-3 py-2 text-white shadow-sm focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                />
+                {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="mobileNumber" className="block text-sm font-medium text-white">
+                  Mobile Number (optional)
+                </label>
+                <input
+                  type="tel"
+                  id="mobileNumber"
+                  value={formData.mobileNumber}
+                  onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
+                  className="mt-1 block w-full rounded-md border border-gray-700 bg-neutral-800 px-3 py-2 text-white shadow-sm focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                />
+                {errors.mobileNumber && <p className="mt-1 text-sm text-red-500">{errors.mobileNumber}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-white">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="mt-1 block w-full rounded-md border border-gray-700 bg-neutral-800 px-3 py-2 text-white shadow-sm focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                />
+                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+              </div>
+
+              <div>
+                <Button type="submit" invert disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                </Button>
+                {status === 'success' && (
+                  <p className="mt-2 text-sm text-green-400">Message sent successfully!</p>
+                )}
+                {status === 'error' && (
+                  <p className="mt-2 text-sm text-red-500">Failed to send message. Please try again.</p>
+                )}
+              </div>
+            </form>
+
             <div className="mt-10 border-t border-white/10 pt-10">
               <h3 className="font-display text-base font-semibold text-white">
                 Our offices
