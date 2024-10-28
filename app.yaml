@@ -1,0 +1,18 @@
+runtime: python310
+entrypoint: gunicorn -b :$PORT spectrumproject.wsgi
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: "spectrumproject.settings"
+  DEBUG: "False"
+  GCP_PROJECT_ID: "spectrum-web-co"
+  GS_BUCKET_NAME: "spectrum-web-co-static"
+  USE_GOOGLE_CLOUD: "True"
+
+handlers:
+- url: /static
+  static_dir: staticfiles/
+- url: /.*
+  script: auto
+
+beta_settings:
+  cloud_sql_instances: spectrum-web-co:australia-southeast1:spectrum-co

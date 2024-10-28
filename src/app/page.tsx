@@ -11,6 +11,7 @@ import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { Testimonial } from '@/components/Testimonial'
 import ShineBorder from "@/components/ui/shine-border"
+import { Meteors } from "@/components/ui/meteors"
 import logoBrightPath from '@/images/clients/bright-path/logo-light.svg'
 import logoFamilyFund from '@/images/clients/family-fund/logo-light.svg'
 import logoGreenLife from '@/images/clients/green-life/logo-light.svg'
@@ -36,15 +37,16 @@ const clients = [
 
 function Clients() {
   return (
-    <div className="mt-24 sm:mt-32 lg:mt-56">
-      <div className="relative mx-auto w-[calc(100vw-2rem)] sm:w-[calc(100vw-4rem)] lg:w-[calc(100vw-6rem)]">
-        <ShineBorder
-          className="w-full overflow-hidden rounded-xl bg-neutral-950 py-20 sm:py-32"
-          color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
-          borderWidth={16}
-          borderRadius={12} // Match the rounded-xl (12px)
-        >
-          <Container>
+    <div className="mt-24 sm:mt-32 lg:mt-56 w-full">
+      <ShineBorder
+        className="relative overflow-hidden bg-neutral-950 py-20 sm:py-32 w-full"
+        color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+        borderRadius={32}  // 2rem in pixels
+        borderWidth={8}    // Changed from size={8}
+      >
+        <Container className="relative z-10">
+          {/* Add a wrapper div with the same border radius */}
+          <div className="rounded-[2rem] bg-neutral-950 p-8">
             <FadeIn className="flex items-center gap-x-8">
               <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
                 We partner with businesses to deliver innovative web solutions
@@ -65,9 +67,10 @@ function Clients() {
                 ))}
               </ul>
             </FadeInStagger>
-          </Container>
-        </ShineBorder>
-      </div>
+          </div>
+        </Container>
+        <Meteors number={20} />
+      </ShineBorder>
     </div>
   )
 }

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run build:email-styles && next build",
+    "setup": "NODE_OPTIONS='--loader ts-node/esm' ts-node setup.ts",
     "start": "next start",
     "lint": "next lint",
     "build:email-styles": "node emails/build-styles.js"
@@ -28,6 +29,7 @@
     "@types/canvas-confetti": "^1.6.4",
     "acorn": "^8.10.0",
     "acorn-jsx": "^5.3.2",
+    "axios": "^1.7.7",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -75,6 +77,7 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "sharp": "0.33.1",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.3.3"
   },
   "engines": {

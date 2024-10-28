@@ -7,7 +7,7 @@ import { Offices } from '@/components/Offices'
 import { useState } from 'react'
 
 export function ContactSection() {
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,14 +27,14 @@ export function ContactSection() {
   }
 
   function validateMobileNumber(number: string) {
-    const re = /^(\+?\d{1,4}?[\s-]?)?((\(\d{1,4}\))|\d{1,4})[\s-]?\d{3,4}[\s-]?\d{3,4}$/
+    const re = /^(\+?\d{1,4}?[\s-]?)?(($$\d{1,4}$$)|\d{1,4})[\s-]?\d{3,4}[\s-]?\d{3,4}$/
     return re.test(number)
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); // Stop form from submitting normally
-    e.stopPropagation(); // Stop event bubbling
-    console.log('Form submission prevented');
+    e.preventDefault()
+    e.stopPropagation()
+    console.log('Form submission prevented')
 
     // Validation checks
     const newErrors = {
@@ -66,17 +66,17 @@ export function ContactSection() {
     }
 
     if (hasError) {
-      console.log('Validation failed:', newErrors);
+      console.log('Validation failed:', newErrors)
       setErrors(newErrors)
       return
     }
 
     setStatus('sending')
-    console.log('Attempting to send data:', formData);
+    console.log('Attempting to send data:', formData)
 
     try {
-      const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`
-      console.log('Sending to:', apiUrl);
+      const apiUrl = '/api/contact'
+      console.log('Sending to:', apiUrl)
 
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -87,16 +87,16 @@ export function ContactSection() {
         body: JSON.stringify(formData),
       })
 
-      console.log('Response status:', response.status);
+      console.log('Response status:', response.status)
       
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('API Error:', errorData);
-        throw new Error(errorData.error || 'Failed to send message')
+        const errorData = await response.json()
+        console.error('API Error:', errorData)
+        throw new Error(errorData.detail || 'Failed to send message')
       }
 
-      const data = await response.json();
-      console.log('Success response:', data);
+      const data = await response.json()
+      console.log('Success response:', data)
 
       setStatus('success')
       setFormData({
@@ -106,7 +106,7 @@ export function ContactSection() {
         message: '',
       })
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error('Submission error:', error)
       setStatus('error')
     }
   }
@@ -123,7 +123,6 @@ export function ContactSection() {
             <form 
               onSubmit={handleSubmit} 
               className="mt-6 space-y-6"
-              method="POST" // Remove this if present
             >
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-white">

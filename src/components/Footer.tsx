@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
@@ -79,8 +82,36 @@ function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 }
 
 function NewsletterForm() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('loading')
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Subscription failed')
+      }
+
+      setStatus('success')
+      setEmail('')
+    } catch (error) {
+      console.error('Subscription error:', error)
+      setStatus('error')
+    }
+  }
+
   return (
-    <form className="max-w-sm">
+    <form onSubmit={handleSubmit} className="max-w-sm">
       <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
         Sign up for our newsletter
       </h2>
@@ -94,18 +125,31 @@ function NewsletterForm() {
           placeholder="Email address"
           autoComplete="email"
           aria-label="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
         />
         <div className="absolute inset-y-1 right-1 flex justify-end">
           <button
             type="submit"
             aria-label="Submit"
-            className="flex aspect-square h-full items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
+            disabled={status === 'loading'}
+            className="flex aspect-square h-full items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800 disabled:opacity-50"
           >
-            <ArrowIcon className="w-4" />
+            {status === 'loading' ? (
+              <span className="animate-spin">&#8987;</span>
+            ) : (
+              <ArrowIcon className="w-4" />
+            )}
           </button>
         </div>
       </div>
+      {status === 'success' && (
+        <p className="mt-2 text-sm text-green-600">Subscribed successfully!</p>
+      )}
+      {status === 'error' && (
+        <p className="mt-2 text-sm text-red-600">Subscription failed. Please try again.</p>
+      )}
     </form>
   )
 }
