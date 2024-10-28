@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build:email-styles && next build",
+    "build": "next build",
     "setup": "NODE_OPTIONS='--loader ts-node/esm' ts-node setup.ts",
     "start": "next start",
     "lint": "next lint",
@@ -29,6 +29,7 @@
     "@types/canvas-confetti": "^1.6.4",
     "acorn": "^8.10.0",
     "acorn-jsx": "^5.3.2",
+    "appwrite": "^16.0.2",
     "axios": "^1.7.7",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
