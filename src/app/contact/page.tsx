@@ -1,7 +1,6 @@
 'use client'
 
 import { useId, useState } from 'react'
-import { type Metadata } from 'next'
 import Link from 'next/link'
 
 import { Border } from '@/components/Border'
@@ -16,7 +15,7 @@ function TextInput({
   label,
   ...props
 }: React.ComponentPropsWithoutRef<'input'> & { label: string }) {
-  let id = useId()
+  const id = useId()
 
   return (
     <div className="group relative z-0 transition-all focus-within:z-10">
@@ -29,7 +28,7 @@ function TextInput({
       />
       <label
         htmlFor={id}
-        className="pointer-events-none absolute left-6 top-1/2 -mt-3 origin-left text-base/6 text-neutral-500 transition-all duration-200 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:font-semibold peer-focus:text-neutral-950 peer-[:not(:placeholder-shown)]:-translate-y-4 peer-[:not(:placeholder-shown)]:scale-75 peer-[:not(:placeholder-shown)]:font-semibold peer-[:not(:placeholder-shown)]:text-neutral-950"
+        className="pointer-events-none absolute left-6 top-1/2 -mt-3 origin-left text-base/6 text-neutral-500 transition-all duration-200 peer-placeholder-shown:-translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:font-semibold peer-focus:text-neutral-950"
       >
         {label}
       </label>
@@ -66,11 +65,9 @@ function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Starting work inquiry submission...')
     setStatus('sending')
 
     try {
-      console.log('Sending work inquiry:', formData)
       const response = await fetch('/api/work-inquiry', {
         method: 'POST',
         headers: {
@@ -79,8 +76,6 @@ function ContactForm() {
         body: JSON.stringify(formData),
       })
 
-      console.log('Response status:', response.status)
-      
       if (!response.ok) {
         throw new Error('Failed to send inquiry')
       }
@@ -101,18 +96,18 @@ function ContactForm() {
   }
 
   return (
-    <FadeIn>
+    <FadeIn className="lg:order-last">
       <form onSubmit={handleSubmit}>
         <h2 className="font-display text-base font-semibold text-neutral-950">
           Work inquiries
         </h2>
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
-          <TextInput 
-            label="Name" 
-            name="name" 
+          <TextInput
+            label="Name"
+            name="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            autoComplete="name" 
+            autoComplete="name"
           />
           <TextInput
             label="Email"
@@ -129,16 +124,16 @@ function ContactForm() {
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             autoComplete="organization"
           />
-          <TextInput 
-            label="Phone" 
-            type="tel" 
+          <TextInput
+            label="Phone"
+            type="tel"
             name="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            autoComplete="tel" 
+            autoComplete="tel"
           />
-          <TextInput 
-            label="Message" 
+          <TextInput
+            label="Message"
             name="message"
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -147,32 +142,32 @@ function ContactForm() {
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Budget</legend>
               <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput 
-                  label="$1K – $2K" 
-                  name="budget" 
-                  value="2k"
-                  checked={formData.budget === '2k'}
+                <RadioInput
+                  label="$1K – $2K"
+                  name="budget"
+                  value="$1K – $2K"
+                  checked={formData.budget === '$1K – $2K'}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                 />
-                <RadioInput 
-                  label="$2K – $5K" 
-                  name="budget" 
-                  value="5k"
-                  checked={formData.budget === '5k'}
+                <RadioInput
+                  label="$2K – $5K"
+                  name="budget"
+                  value="$2K – $5K"
+                  checked={formData.budget === '$2K – $5K'}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                 />
-                <RadioInput 
-                  label="$5K – $10K" 
-                  name="budget" 
-                  value="10k"
-                  checked={formData.budget === '10k'}
+                <RadioInput
+                  label="$5K – $10K"
+                  name="budget"
+                  value="$5K – $10K"
+                  checked={formData.budget === '$5K – $10K'}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                 />
-                <RadioInput 
-                  label="More than $10K" 
-                  name="budget" 
-                  value="more"
-                  checked={formData.budget === 'more'}
+                <RadioInput
+                  label="More than $10K"
+                  name="budget"
+                  value="More than $10K"
+                  checked={formData.budget === 'More than $10K'}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                 />
               </div>
@@ -180,7 +175,7 @@ function ContactForm() {
           </div>
         </div>
         <Button type="submit" className="mt-10" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Sending...' : 'Let's work together'}
+          {status === 'sending' ? 'Sending...' : 'Let’s work together'}
         </Button>
         {status === 'success' && (
           <p className="mt-2 text-sm text-green-600">Message sent successfully!</p>
@@ -200,7 +195,9 @@ function ContactDetails() {
         Our offices
       </h2>
       <p className="mt-6 text-base text-neutral-600">
-        Interested in face-to-face interactions? While we typically prefer digital communications for efficiency, we are pleased to provide our office addresses as required.
+        Interested in face-to-face interactions? While we typically prefer digital
+        communications for efficiency, we are pleased to provide our office addresses as
+        required.
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
@@ -237,11 +234,6 @@ function ContactDetails() {
       </Border>
     </FadeIn>
   )
-}
-
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Let’s work together. We can’t wait to hear from you.',
 }
 
 export default function Contact() {
