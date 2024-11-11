@@ -75,14 +75,10 @@ export function ContactSection() {
     console.log('Attempting to send data:', formData)
 
     try {
-      const apiUrl = '/api/contact'
-      console.log('Sending to:', apiUrl)
-
-      const response = await fetch(apiUrl, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify(formData),
       })

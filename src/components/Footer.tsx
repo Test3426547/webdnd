@@ -84,9 +84,30 @@ function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function NewsletterForm() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return re.test(email)
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setErrorMessage('')
+
+    // Validate email
+    if (!email) {
+      setErrorMessage('Email is required')
+      setStatus('error')
+      return
+    }
+
+    if (!validateEmail(email)) {
+      setErrorMessage('Please enter a valid email address')
+      setStatus('error')
+      return
+    }
+
     setStatus('loading')
 
     try {
@@ -98,14 +119,22 @@ function NewsletterForm() {
         body: JSON.stringify({ email }),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        throw new Error('Subscription failed')
+        throw new Error(data.error || 'Subscription failed')
       }
 
       setStatus('success')
       setEmail('')
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setStatus('idle')
+      }, 5000)
     } catch (error) {
-      console.error('Subscription error:', error)
+      console.error('Newsletter subscription error:', error)
+      setErrorMessage('Subscription failed. Please try again.')
       setStatus('error')
     }
   }
@@ -126,8 +155,17 @@ function NewsletterForm() {
           autoComplete="email"
           aria-label="Email address"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
+          onChange={(e) => {
+            setEmail(e.target.value)
+            // Reset error/success states when user starts typing
+            if (status !== 'idle') {
+              setStatus('idle')
+              setErrorMessage('')
+            }
+          }}
+          className={`block w-full rounded-2xl border ${
+            status === 'error' ? 'border-red-500' : 'border-neutral-300'
+          } bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5`}
         />
         <div className="absolute inset-y-1 right-1 flex justify-end">
           <button
@@ -145,10 +183,12 @@ function NewsletterForm() {
         </div>
       </div>
       {status === 'success' && (
-        <p className="mt-2 text-sm text-green-600">Subscribed successfully!</p>
+        <p className="mt-2 text-sm text-green-600">
+          Thanks for subscribing! Check your email for confirmation.
+        </p>
       )}
       {status === 'error' && (
-        <p className="mt-2 text-sm text-red-600">Subscription failed. Please try again.</p>
+        <p className="mt-2 text-sm text-red-600">{errorMessage}</p>
       )}
     </form>
   )

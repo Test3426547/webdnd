@@ -1,4 +1,6 @@
-import { useId } from 'react'
+'use client'
+
+import { useId, useState } from 'react'
 import { type Metadata } from 'next'
 import Link from 'next/link'
 
@@ -52,43 +54,137 @@ function RadioInput({
 }
 
 function ContactForm() {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    message: '',
+    budget: '',
+  })
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('sending')
+
+    try {
+      const response = await fetch('/api/work-inquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send inquiry')
+      }
+
+      setStatus('success')
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        message: '',
+        budget: '',
+      })
+    } catch (error) {
+      console.error('Work inquiry error:', error)
+      setStatus('error')
+    }
+  }
+
   return (
     <div className="lg:order-last">
       <FadeIn>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2 className="font-display text-base font-semibold text-neutral-950">
             Work inquiries
           </h2>
           <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
-            <TextInput label="Name" name="name" autoComplete="name" />
+            <TextInput 
+              label="Name" 
+              name="name" 
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              autoComplete="name" 
+            />
             <TextInput
               label="Email"
               type="email"
               name="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               autoComplete="email"
             />
             <TextInput
               label="Company"
               name="company"
+              value={formData.company}
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
               autoComplete="organization"
             />
-            <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
-            <TextInput label="Message" name="message" />
+            <TextInput 
+              label="Phone" 
+              type="tel" 
+              name="phone"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              autoComplete="tel" 
+            />
+            <TextInput 
+              label="Message" 
+              name="message"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            />
             <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
               <fieldset>
                 <legend className="text-base/6 text-neutral-500">Budget</legend>
                 <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                  <RadioInput label="$1K – $2K" name="budget" value="2" />
-                  <RadioInput label="$2K – $5K" name="budget" value="5" />
-                  <RadioInput label="$5K – $10K" name="budget" value="10" />
-                  <RadioInput label="More than $10K" name="budget" value="10" />
+                  <RadioInput 
+                    label="$1K – $2K" 
+                    name="budget" 
+                    value="2k"
+                    checked={formData.budget === '2k'}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                  />
+                  <RadioInput 
+                    label="$2K – $5K" 
+                    name="budget" 
+                    value="5k"
+                    checked={formData.budget === '5k'}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                  />
+                  <RadioInput 
+                    label="$5K – $10K" 
+                    name="budget" 
+                    value="10k"
+                    checked={formData.budget === '10k'}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                  />
+                  <RadioInput 
+                    label="More than $10K" 
+                    name="budget" 
+                    value="more"
+                    checked={formData.budget === 'more'}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                  />
                 </div>
               </fieldset>
             </div>
           </div>
-          <Button type="submit" className="mt-10">
-            Let’s work together
+          <Button type="submit" className="mt-10" disabled={status === 'sending'}>
+            {status === 'sending' ? 'Sending...' : 'Let's work together'}
           </Button>
+          {status === 'success' && (
+            <p className="mt-2 text-sm text-green-600">Message sent successfully!</p>
+          )}
+          {status === 'error' && (
+            <p className="mt-2 text-sm text-red-600">Failed to send message. Please try again.</p>
+          )}
         </form>
       </FadeIn>
     </div>
