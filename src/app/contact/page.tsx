@@ -1,6 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
+import { type Metadata } from 'next'
 import Link from 'next/link'
 
 import { Border } from '@/components/Border'
@@ -100,97 +101,95 @@ function ContactForm() {
   }
 
   return (
-    <div className="lg:order-last">
-      <FadeIn>
-        <form onSubmit={handleSubmit}>
-          <h2 className="font-display text-base font-semibold text-neutral-950">
-            Work inquiries
-          </h2>
-          <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
-            <TextInput 
-              label="Name" 
-              name="name" 
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              autoComplete="name" 
-            />
-            <TextInput
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              autoComplete="email"
-            />
-            <TextInput
-              label="Company"
-              name="company"
-              value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              autoComplete="organization"
-            />
-            <TextInput 
-              label="Phone" 
-              type="tel" 
-              name="phone"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              autoComplete="tel" 
-            />
-            <TextInput 
-              label="Message" 
-              name="message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            />
-            <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
-              <fieldset>
-                <legend className="text-base/6 text-neutral-500">Budget</legend>
-                <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                  <RadioInput 
-                    label="$1K – $2K" 
-                    name="budget" 
-                    value="2k"
-                    checked={formData.budget === '2k'}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                  />
-                  <RadioInput 
-                    label="$2K – $5K" 
-                    name="budget" 
-                    value="5k"
-                    checked={formData.budget === '5k'}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                  />
-                  <RadioInput 
-                    label="$5K – $10K" 
-                    name="budget" 
-                    value="10k"
-                    checked={formData.budget === '10k'}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                  />
-                  <RadioInput 
-                    label="More than $10K" 
-                    name="budget" 
-                    value="more"
-                    checked={formData.budget === 'more'}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                  />
-                </div>
-              </fieldset>
-            </div>
+    <FadeIn>
+      <form onSubmit={handleSubmit}>
+        <h2 className="font-display text-base font-semibold text-neutral-950">
+          Work inquiries
+        </h2>
+        <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
+          <TextInput 
+            label="Name" 
+            name="name" 
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            autoComplete="name" 
+          />
+          <TextInput
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            autoComplete="email"
+          />
+          <TextInput
+            label="Company"
+            name="company"
+            value={formData.company}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+            autoComplete="organization"
+          />
+          <TextInput 
+            label="Phone" 
+            type="tel" 
+            name="phone"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            autoComplete="tel" 
+          />
+          <TextInput 
+            label="Message" 
+            name="message"
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          />
+          <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
+            <fieldset>
+              <legend className="text-base/6 text-neutral-500">Budget</legend>
+              <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <RadioInput 
+                  label="$1K – $2K" 
+                  name="budget" 
+                  value="2k"
+                  checked={formData.budget === '2k'}
+                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                />
+                <RadioInput 
+                  label="$2K – $5K" 
+                  name="budget" 
+                  value="5k"
+                  checked={formData.budget === '5k'}
+                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                />
+                <RadioInput 
+                  label="$5K – $10K" 
+                  name="budget" 
+                  value="10k"
+                  checked={formData.budget === '10k'}
+                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                />
+                <RadioInput 
+                  label="More than $10K" 
+                  name="budget" 
+                  value="more"
+                  checked={formData.budget === 'more'}
+                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                />
+              </div>
+            </fieldset>
           </div>
-          <Button type="submit" className="mt-10" disabled={status === 'sending'}>
-            {status === 'sending' ? 'Sending...' : 'Let's work together'}
-          </Button>
-          {status === 'success' && (
-            <p className="mt-2 text-sm text-green-600">Message sent successfully!</p>
-          )}
-          {status === 'error' && (
-            <p className="mt-2 text-sm text-red-600">Failed to send message. Please try again.</p>
-          )}
-        </form>
-      </FadeIn>
-    </div>
+        </div>
+        <Button type="submit" className="mt-10" disabled={status === 'sending'}>
+          {status === 'sending' ? 'Sending...' : 'Let's work together'}
+        </Button>
+        {status === 'success' && (
+          <p className="mt-2 text-sm text-green-600">Message sent successfully!</p>
+        )}
+        {status === 'error' && (
+          <p className="mt-2 text-sm text-red-600">Failed to send message. Please try again.</p>
+        )}
+      </form>
+    </FadeIn>
   )
 }
 
@@ -240,11 +239,16 @@ function ContactDetails() {
   )
 }
 
+export const metadata: Metadata = {
+  title: 'Contact Us',
+  description: 'Let’s work together. We can’t wait to hear from you.',
+}
+
 export default function Contact() {
   return (
     <>
-      <PageIntro eyebrow="Contact us" title="Let's work together">
-        <p>We can't wait to hear from you.</p>
+      <PageIntro eyebrow="Contact us" title="Let’s work together">
+        <p>We can’t wait to hear from you.</p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
