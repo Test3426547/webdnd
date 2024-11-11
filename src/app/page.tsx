@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
@@ -23,6 +24,7 @@ import logoPhobiaLight from '@/images/clients/phobia/logo-light.svg'
 import logoUnseal from '@/images/clients/unseal/logo-light.svg'
 import imageLaptop from '@/images/laptop.jpg'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
+import { AnimatedTitle } from '@/components/ui/animated-title'
 
 const clients = [
   ['Phobia', logoPhobiaLight],
@@ -83,7 +85,14 @@ function CaseStudies({
   return (
     <>
       <SectionIntro
-        title="Crafting digital experiences that drive business growth"
+        title={
+          <FadeIn>
+            <AnimatedTitle
+              className="text-4xl font-bold text-neutral-950 dark:text-white"
+              text="Crafting digital experiences that drive business growth"
+            />
+          </FadeIn>
+        }
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
@@ -138,7 +147,14 @@ function Services() {
     <>
       <SectionIntro
         eyebrow="Services"
-        title="Delivering purpose-driven web solutions for your business"
+        title={
+          <FadeIn>
+            <AnimatedTitle
+              className="text-4xl font-bold text-neutral-950 dark:text-white"
+              text="Delivering purpose-driven web solutions for your business"
+            />
+          </FadeIn>
+        }
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>

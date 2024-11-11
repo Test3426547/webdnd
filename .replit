@@ -1,20 +1,11 @@
-modules = ["nodejs-20:v8-20230920-bd784b9", "python-3.12:v18-20230807-322e88b"]
-run = "npm run dev & cd backend && poetry run python manage.py runserver 0.0.0.0:8000"
+modules = ["nodejs-20:v8-20230920-bd784b9"]
+run = "npm run dev --legacy-peer-deps"
 
 [nix]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "npm run dev"]
-deploymentTarget = "cloudrun"
-
-[languages]
-
-[languages.python]
-pattern = "**/*.py"
-
-[languages.python.languageServer]
-start = "pylsp"
+run = ["sh", "-c", "npm run dev --legacy-peer-deps"]
 
 [[ports]]
 localPort = 3000
