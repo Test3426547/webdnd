@@ -66,9 +66,11 @@ function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log('Starting work inquiry submission...')
     setStatus('sending')
 
     try {
+      console.log('Sending work inquiry:', formData)
       const response = await fetch('/api/work-inquiry', {
         method: 'POST',
         headers: {
@@ -77,6 +79,8 @@ function ContactForm() {
         body: JSON.stringify(formData),
       })
 
+      console.log('Response status:', response.status)
+      
       if (!response.ok) {
         throw new Error('Failed to send inquiry')
       }
