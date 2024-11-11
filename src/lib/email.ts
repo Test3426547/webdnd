@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_EMAIL = 'Spectrum Web Co <no-reply@spectrumwebco.com.au>';
-const ADMIN_EMAIL = 'ove@3three.com.au';
+const ADMIN_EMAIL = 'oveshen.govender@gmail.com';
 
 // Contact Form Emails
 export async function sendContactFormEmails({
