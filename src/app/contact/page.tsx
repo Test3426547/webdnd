@@ -53,43 +53,45 @@ function RadioInput({
 
 function ContactForm() {
   return (
-    <FadeIn className="lg:order-last">
-      <form>
-        <h2 className="font-display text-base font-semibold text-neutral-950">
-          Work inquiries
-        </h2>
-        <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
-          <TextInput label="Name" name="name" autoComplete="name" />
-          <TextInput
-            label="Email"
-            type="email"
-            name="email"
-            autoComplete="email"
-          />
-          <TextInput
-            label="Company"
-            name="company"
-            autoComplete="organization"
-          />
-          <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
-          <TextInput label="Message" name="message" />
-          <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
-            <fieldset>
-              <legend className="text-base/6 text-neutral-500">Budget</legend>
-              <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput label="$1K – $2K" name="budget" value="2" />
-                <RadioInput label="$2K – $5K" name="budget" value="5" />
-                <RadioInput label="$5K – $10K" name="budget" value="10" />
-                <RadioInput label="More than $10K" name="budget" value="10" />
-              </div>
-            </fieldset>
+    <div className="lg:order-last">
+      <FadeIn>
+        <form>
+          <h2 className="font-display text-base font-semibold text-neutral-950">
+            Work inquiries
+          </h2>
+          <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
+            <TextInput label="Name" name="name" autoComplete="name" />
+            <TextInput
+              label="Email"
+              type="email"
+              name="email"
+              autoComplete="email"
+            />
+            <TextInput
+              label="Company"
+              name="company"
+              autoComplete="organization"
+            />
+            <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
+            <TextInput label="Message" name="message" />
+            <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
+              <fieldset>
+                <legend className="text-base/6 text-neutral-500">Budget</legend>
+                <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
+                  <RadioInput label="$1K – $2K" name="budget" value="2" />
+                  <RadioInput label="$2K – $5K" name="budget" value="5" />
+                  <RadioInput label="$5K – $10K" name="budget" value="10" />
+                  <RadioInput label="More than $10K" name="budget" value="10" />
+                </div>
+              </fieldset>
+            </div>
           </div>
-        </div>
-        <Button type="submit" className="mt-10">
-          Let’s work together
-        </Button>
-      </form>
-    </FadeIn>
+          <Button type="submit" className="mt-10">
+            Let’s work together
+          </Button>
+        </form>
+      </FadeIn>
+    </div>
   )
 }
 
