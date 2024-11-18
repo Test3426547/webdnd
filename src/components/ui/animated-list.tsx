@@ -7,10 +7,11 @@ export interface AnimatedListProps {
   className?: string;
   children: React.ReactNode;
   delay?: number;
+  maxItems?: number;
 }
 
 export const AnimatedList = React.memo(
-  ({ className, children, delay = 1000 }: AnimatedListProps) => {
+  ({ className, children, delay = 1000, maxItems = 3 }: AnimatedListProps) => {
     const [index, setIndex] = useState(0);
     const childrenArray = React.Children.toArray(children);
 
@@ -22,16 +23,27 @@ export const AnimatedList = React.memo(
       return () => clearInterval(interval);
     }, [childrenArray.length, delay]);
 
-    const itemsToShow = useMemo(
-      () => childrenArray.slice(0, index + 1).reverse(),
-      [index, childrenArray],
-    );
+    const itemsToShow = useMemo(() => {
+      const endIndex = index + 1;
+      const startIndex = Math.max(0, endIndex - maxItems);
+      return childrenArray.slice(startIndex, endIndex).reverse();
+    }, [index, childrenArray, maxItems]);
 
     return (
-      <div className={`flex flex-col items-center gap-4 ${className}`}>
-        <AnimatePresence>
-          {itemsToShow.map((item) => (
-            <AnimatedListItem key={(item as ReactElement).key}>
+      <div 
+        className={`flex flex-col items-center gap-4 ${className}`}
+        style={{ 
+          height: `${maxItems * 84}px`,
+          overflow: 'hidden',
+          position: 'relative'
+        }}
+      >
+        <AnimatePresence initial={false} mode="popLayout">
+          {itemsToShow.map((item, i) => (
+            <AnimatedListItem 
+              key={(item as ReactElement).key || i}
+              custom={i}
+            >
               {item}
             </AnimatedListItem>
           ))}
@@ -43,16 +55,44 @@ export const AnimatedList = React.memo(
 
 AnimatedList.displayName = "AnimatedList";
 
-export function AnimatedListItem({ children }: { children: React.ReactNode }) {
+interface AnimatedListItemProps {
+  children: React.ReactNode;
+  custom: number;
+}
+
+export function AnimatedListItem({ children, custom }: AnimatedListItemProps) {
   const animations = {
-    initial: { scale: 0, opacity: 0 },
-    animate: { scale: 1, opacity: 1, originY: 0 },
-    exit: { scale: 0, opacity: 0 },
-    transition: { type: "spring", stiffness: 350, damping: 40 },
+    initial: { 
+      opacity: 0,
+      y: 50,
+    },
+    animate: { 
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 350,
+        damping: 40,
+      }
+    },
+    exit: { 
+      opacity: 0,
+      y: -50,
+      transition: {
+        duration: 0.2,
+      }
+    },
   };
 
   return (
-    <motion.div {...animations} layout className="mx-auto w-full">
+    <motion.div 
+      {...animations}
+      layout
+      className="mx-auto w-full absolute"
+      style={{
+        top: `${custom * 84}px`,
+      }}
+    >
       {children}
     </motion.div>
   );

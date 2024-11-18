@@ -7,6 +7,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
+import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect'
 
 const navigation = [
   {
@@ -39,34 +40,6 @@ const navigation = [
     links: socialMediaProfiles,
   },
 ]
-
-function Navigation() {
-  return (
-    <nav>
-      <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-        {navigation.map((section, sectionIndex) => (
-          <li key={sectionIndex}>
-            <div className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-              {section.title}
-            </div>
-            <ul role="list" className="mt-4 text-sm text-neutral-700">
-              {section.links.map((link, linkIndex) => (
-                <li key={linkIndex} className="mt-4">
-                  <Link
-                    href={link.href}
-                    className="transition hover:text-neutral-950"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
-}
 
 function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -141,13 +114,20 @@ function NewsletterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm">
-      <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-        Sign up for our newsletter
-      </h2>
-      <p className="mt-4 text-sm text-neutral-700">
-        Subscribe to get the latest design news, articles, resources and
-        inspiration.
-      </p>
+      <TypewriterEffectSmooth
+        words={[{
+          text: "Sign up for our newsletter",
+          className: "font-display text-sm font-semibold tracking-wider text-neutral-950"
+        }]}
+        className="!my-0"
+      />
+      <TypewriterEffectSmooth
+        words={[{
+          text: "Subscribe to get the latest design news, articles, resources and inspiration.",
+          className: "mt-4 text-sm text-neutral-700 whitespace-normal"
+        }]}
+        className="block w-full"
+      />
       <div className="relative mt-6">
         <input
           type="email"
@@ -196,23 +176,68 @@ function NewsletterForm() {
 
 export function Footer() {
   return (
-    <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
-      <FadeIn>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
-          <Navigation />
-          <div className="flex lg:justify-end">
-            <NewsletterForm />
+    <div className="border-t border-neutral-100 dark:border-white/[0.1] px-8 py-20 bg-white dark:bg-neutral-950 w-full relative overflow-hidden">
+      <Container>
+        <FadeIn>
+          <div className="max-w-7xl mx-auto text-sm text-neutral-500">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-16">
+              {/* Logo and Newsletter Section */}
+              <div className="flex flex-col space-y-8 lg:max-w-[280px]">
+                <Logo className="h-8" fillOnHover />
+                <NewsletterForm />
+                <TypewriterEffectSmooth 
+                  words={[{ 
+                    text: `© Spectrum Web Co. ${new Date().getFullYear()}`,
+                    className: "text-sm text-neutral-700"
+                  }]}
+                />
+              </div>
+
+              {/* Navigation Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-24 items-start lg:flex-1 lg:pl-8">
+                {navigation.map((section, sectionIndex) => (
+                  <div key={sectionIndex} className="flex justify-start space-y-6 flex-col min-w-[160px]">
+                    <TypewriterEffectSmooth
+                      words={[{
+                        text: section.title,
+                        className: "font-display text-sm font-semibold tracking-wider text-neutral-950 dark:text-white"
+                      }]}
+                    />
+                    <ul className="space-y-5 text-sm text-neutral-700">
+                      {section.links.map((link, linkIndex) => (
+                        <li key={linkIndex} className="list-none">
+                          <Link href={link.href}>
+                            <TypewriterEffectSmooth
+                              words={[{
+                                text: typeof link.title === 'string' ? link.title : 'See all →',
+                                className: "transition hover:text-neutral-950 dark:hover:text-white"
+                              }]}
+                              className="!my-0"
+                            />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="mb-20 mt-24 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
-          <Link href="/" aria-label="Home">
-            <Logo className="h-8" fillOnHover />
-          </Link>
-          <p className="text-sm text-neutral-700">
-            © Spectrum Web Co. {new Date().getFullYear()}
-          </p>
-        </div>
-      </FadeIn>
-    </Container>
+
+          {/* Large Spectrum Text */}
+          <div className="w-full flex justify-center items-center">
+            <div className="relative w-full flex justify-center items-center">
+              <TypewriterEffectSmooth
+                words={[{
+                  text: "Spectrum.",
+                  className: "text-center mt-20 text-5xl md:text-9xl lg:text-[12rem] xl:text-[13rem] font-display font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 dark:from-neutral-950 to-neutral-200 dark:to-neutral-800"
+                }]}
+                className="flex justify-center items-center text-center"
+              />
+            </div>
+          </div>
+        </FadeIn>
+      </Container>
+    </div>
   )
 }

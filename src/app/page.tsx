@@ -25,6 +25,8 @@ import logoUnseal from '@/images/clients/unseal/logo-light.svg'
 import imageLaptop from '@/images/laptop.jpg'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
 import { AnimatedTitle } from '@/components/ui/animated-title'
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
+import BlurFade from '@/components/ui/blur-fade'
 
 const clients = [
   ['Phobia', logoPhobiaLight],
@@ -95,45 +97,54 @@ function CaseStudies({
         }
         className="mt-24 sm:mt-32 lg:mt-40"
       >
-        <p>
-          At Spectrum Web Co, we specialize in creating innovative web design and development solutions that are uniquely tailored to your business needs. Our team collaborates closely with you to understand your goals, ensuring we deliver digital experiences that not only look exceptional but also engage your audience and drive meaningful results for your business growth. We are committed to helping you harness the power of the web to expand your reach and achieve your objectives.
-        </p>
+        <BlurFade duration={0.75} inView>
+          <p className="mt-6 text-base text-neutral-600">
+            At Spectrum Web Co, we specialize in creating innovative web design and development solutions that are uniquely tailored to your business needs. Our team collaborates closely with you to understand your goals, ensuring we deliver digital experiences that not only look exceptional but also engage your audience and drive meaningful results for your business growth. We are committed to helping you harness the power of the web to expand your reach and achieve your objectives.
+          </p>
+        </BlurFade>
       </SectionIntro>
       <Container className="mt-16">
         <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {caseStudies.map((caseStudy) => (
             <FadeIn key={caseStudy.href} className="flex">
-              <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
-                <h3>
-                  <Link href={caseStudy.href}>
-                    <span className="absolute inset-0 rounded-3xl" />
-                    <Image
-                      src={caseStudy.logo}
-                      alt={caseStudy.client}
-                      className="h-16 w-16"
-                      unoptimized
-                    />
-                  </Link>
-                </h3>
-                <p className="mt-6 flex gap-x-2 text-sm text-neutral-950">
-                  <time
-                    dateTime={caseStudy.date.split('-')[0]}
-                    className="font-semibold"
-                  >
-                    {caseStudy.date.split('-')[0]}
-                  </time>
-                  <span className="text-neutral-300" aria-hidden="true">
-                    /
-                  </span>
-                  <span>Case study</span>
-                </p>
-                <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
-                  {caseStudy.title}
-                </p>
-                <p className="mt-4 text-base text-neutral-600">
-                  {caseStudy.description}
-                </p>
-              </article>
+              <ShineBorder
+                className="w-full"
+                color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                borderRadius={24}
+                borderWidth={2}
+              >
+                <article className="relative flex w-full flex-col rounded-3xl p-6 bg-white dark:bg-neutral-950 sm:p-8">
+                  <h3>
+                    <Link href={caseStudy.href}>
+                      <span className="absolute inset-0 rounded-3xl" />
+                      <Image
+                        src={caseStudy.logo}
+                        alt={caseStudy.client}
+                        className="h-16 w-16"
+                        unoptimized
+                      />
+                    </Link>
+                  </h3>
+                  <p className="mt-6 flex gap-x-2 text-sm text-neutral-950">
+                    <time
+                      dateTime={caseStudy.date.split('-')[0]}
+                      className="font-semibold"
+                    >
+                      {caseStudy.date.split('-')[0]}
+                    </time>
+                    <span className="text-neutral-300" aria-hidden="true">
+                      /
+                    </span>
+                    <span>Case study</span>
+                  </p>
+                  <p className="mt-6 font-display text-2xl font-semibold text-neutral-950">
+                    {caseStudy.title}
+                  </p>
+                  <p className="mt-4 text-base text-neutral-600">
+                    {caseStudy.description}
+                  </p>
+                </article>
+              </ShineBorder>
             </FadeIn>
           ))}
         </FadeInStagger>
@@ -157,9 +168,11 @@ function Services() {
         }
         className="mt-24 sm:mt-32 lg:mt-40"
       >
-        <p>
-          We combine creativity and cutting-edge technology to deliver bespoke web solutions that align with your business objectives. Our comprehensive range of services ensures that we can address all aspects of your online presence, from stunning web design to robust development practices. By leveraging the latest technologies, we help your business stand out in the digital landscape, engage your audience effectively, and drive tangible results.
-        </p>
+        <BlurFade duration={0.75} inView>
+          <p className="mt-6 text-base text-neutral-600">
+            We combine creativity and cutting-edge technology to deliver bespoke web solutions that align with your business objectives. Our comprehensive range of services ensures that we can address all aspects of your online presence, from stunning web design to robust development practices. By leveraging the latest technologies, we help your business stand out in the digital landscape, engage your audience effectively, and drive tangible results.
+          </p>
+        </BlurFade>
       </SectionIntro>
       <Container className="mt-16">
         <div className="lg:flex lg:items-center lg:justify-end">
@@ -214,7 +227,11 @@ export default async function Home() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Phobia', logo: logoPhobiaDark }}
       >
-        Working with Spectrum Web Co was a transformative experience for our company. They exceeded our expectations with their innovative design and development services, delivering a website that truly represents our brand and resonates with our target audience. Their team's professionalism, creativity, and commitment to excellence made the entire process seamless and enjoyable. We highly recommend them to any business seeking top-tier web solutions.
+        <TextGenerateEffect
+          words="We partnered with Spectrum Web Co for their innovative approach to web design. They delivered an exceptional website that perfectly captures our brand identity and exceeds all expectations."
+          duration={0.25}
+          filter={false}
+        />
       </Testimonial>
 
       <Services />

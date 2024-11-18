@@ -44,7 +44,7 @@ export function HeroSection() {
           line-height: inherit;
         }
       `}</style>
-      <BlurFade delay={0.25} inView>
+      <BlurFade delay={0.5} inView>
         <p className="mt-6 text-lg text-neutral-600 sm:text-xl">
           At Spectrum Web Co, we are dedicated to providing creative and innovative, purpose-driven web design and development services. Based in Sydney, Australia, we specialize in crafting bespoke digital solutions for small to medium businesses. Our mission is to help you establish a strong online presence, engage your audience effectively, and achieve your business objectives through high-quality web experiences.
         </p>

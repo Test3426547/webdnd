@@ -2,6 +2,7 @@ import clsx from 'clsx'
 
 import { Border } from '@/components/Border'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
+import { GradualSpacingParagraph } from '@/components/ui/gradual-spacing'
 
 export function List({
   children,
@@ -33,7 +34,16 @@ export function ListItem({
           {title && (
             <strong className="font-semibold text-neutral-950">{`${title}. `}</strong>
           )}
-          {children}
+          {typeof children === 'string' ? (
+            <GradualSpacingParagraph
+              text={children}
+              duration={0.3}
+              delayMultiple={0.015}
+              className="leading-7"
+            />
+          ) : (
+            children
+          )}
         </Border>
       </FadeIn>
     </li>
